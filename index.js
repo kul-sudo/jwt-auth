@@ -9,7 +9,7 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
   res.clearCookie('token')
-  res.render('main')
+  res.render('main.ejs')
 })
 
 app.post('/login', async (req, res) => {
@@ -44,7 +44,7 @@ app.get('/data', async (req, res) => {
 
   try {
     const { payload } = await jwtVerify(token, secret)
-    res.render('index', { username: payload.username })
+    res.render('index.ejs', { username: payload.username })
   } catch {
     res.clearCookie('token')
     res.json('Forbidden')
@@ -53,7 +53,7 @@ app.get('/data', async (req, res) => {
 
 app.post('/logout', (req, res) => {
   res.clearCookie('token')
-  res.render('main')
+  res.render('main.ejs')
 })
 
 app.listen(3000)
