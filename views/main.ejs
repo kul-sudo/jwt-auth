@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jwt auth</title>
+  </head>
+  <body>
+    <form method="POST" action="/login" id="login-form">
+      <input type="text" placeholder="username" id="username"><br />
+      <input type="text" placeholder="password" id="password"><br />
+      <button type="submit">Log in</button>
+    </form>
+  </body>
+  <script>
+    const form = document.getElementById('login-form')
+    const username = document.getElementById('username')
+    const password = document.getElementById('password')
+
+    form.addEventListener('submit', event => {
+        event.preventDefault()
+        
+        const usernameValue = username.value
+        const passwordValue = password.value
+        form.action = `/login?username=${encodeURIComponent(usernameValue)}&password=${encodeURIComponent(passwordValue)}`
+
+        form.submit()
+      })
+  </script>
+</html>
+
