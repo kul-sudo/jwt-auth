@@ -51,7 +51,7 @@ app.get('/data', async (req, res) => {
   }
 })
 
-app.post('/logout', (req, res) => {
+app.get('/logout', (req, res) => {
   res.clearCookie('token')
   res.render('main.ejs')
 })
