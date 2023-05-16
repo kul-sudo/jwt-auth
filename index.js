@@ -11,7 +11,7 @@ app.set('views', resolve())
 
 app.get('/', (req, res) => {
   res.clearCookie('token')
-  res.render('main.ejs')
+  res.render(resolve() + '/main.ejs')
 })
 
 app.post('/login', async (req, res) => {
@@ -46,16 +46,16 @@ app.get('/data', async (req, res) => {
 
   try {
     const { payload } = await jwtVerify(token, secret)
-    res.render('index.ejs', { username: payload.username })
+    res.render(resolve() + '/index.ejs', { username: payload.username })
   } catch {
     res.clearCookie('token')
     res.json('Forbidden')
   }
 })
 
-app.get('/logout', (req, res) => {
+app.post('/logout', (req, res) => {
   res.clearCookie('token')
-  res.render('main.ejs')
+  res.render(resolve() + '/main.ejs')
 })
 
 app.listen(3000)
