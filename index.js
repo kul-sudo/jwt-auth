@@ -1,11 +1,13 @@
 import express from 'express'
 import { SignJWT, jwtVerify } from 'jose'
 import cookieParser from 'cookie-parser'
+import { resolve } from 'path'
 
 // initialisation
 const app = express()
 app.use(cookieParser())
 app.set('view engine', 'ejs')
+app.set('views', resolve())
 
 app.get('/', (req, res) => {
   res.clearCookie('token')
