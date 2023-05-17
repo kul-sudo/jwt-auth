@@ -3,6 +3,13 @@ import { SignJWT, jwtVerify } from 'jose'
 import cookieParser from 'cookie-parser'
 import { resolve } from 'path'
 
+// constants
+const secret = new TextEncoder().encode(
+  'cc7e0d44fd473002f1c42167459001140ec6389b7353f8088f4d9a95f2f596f2',
+)
+
+const alg = 'HS256'
+
 // initialisation
 const app = express()
 app.use(cookieParser())
@@ -16,11 +23,6 @@ app.get('/', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.query
-
-  const secret = new TextEncoder().encode(
-    'cc7e0d44fd473002f1c42167459001140ec6389b7353f8088f4d9a95f2f596f2',
-  )
-  const alg = 'HS256'
 
   const token = await new SignJWT({ username, password })
     .setProtectedHeader({ alg })
@@ -38,10 +40,6 @@ app.post('/login', async (req, res) => {
 })
 
 app.get('/data', async (req, res) => {
-  const secret = new TextEncoder().encode(
-    'cc7e0d44fd473002f1c42167459001140ec6389b7353f8088f4d9a95f2f596f2',
-  )
-
   const token = req.cookies.token
 
   try {
