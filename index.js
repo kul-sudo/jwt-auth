@@ -47,7 +47,7 @@ app.get('/data', async (req, res) => {
     res.render(resolve() + '/index.ejs', { username: payload.username })
   } catch {
     res.clearCookie('token')
-    res.json('Forbidden')
+    res.render(resolve() + '/forbidden.ejs')
   }
 })
 

@@ -14,19 +14,21 @@
     </form>
   </body>
   <script>
-    const form = document.getElementById('login-form')
-    const username = document.getElementById('username')
-    const password = document.getElementById('password')
+  const form = document.getElementById('login-form')
+  const username = document.getElementById('username')
+  const password = document.getElementById('password')
 
-    form.addEventListener('submit', event => {
-        event.preventDefault()
-        
-        const usernameValue = username.value
-        const passwordValue = password.value
-        form.action = `/login?username=${encodeURIComponent(usernameValue)}&password=${encodeURIComponent(passwordValue)}`
+  form.addEventListener('submit', event => {
+    event.preventDefault()
 
-        form.submit()
-      })
+    const usernameValue = username.value
+    const passwordValue = password.value
+    if (usernameValue !== '' && passwordValue !== '') {
+      form.action = `/login?username=${encodeURIComponent(usernameValue)}&password=${encodeURIComponent(passwordValue)}`
+
+      form.submit()
+    }
+  })
   </script>
 </html>
 
